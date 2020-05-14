@@ -1,11 +1,13 @@
 import React from 'react';
-import './App.css';
-import Main from './components/main' 
+import './styles/css/main.css'
+/*import Main from './views/main' */
+import Home from './views/home'
 
 function App() {
   return (
-    <div className="container-fluid">
-        <Main />
+    <div className="app">
+      {/* <Main /> */}
+        <Home />
     </div>
   );
 }
