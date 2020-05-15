@@ -1,14 +1,25 @@
-import React from 'react';
-import './styles/css/main.css'
-/*import Main from './views/main' */
-import Home from './views/home'
+import React from "react";
+
+/* thired part packages */
+
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+
+
+/* our components */
+import "./styles/css/main.css";
+import Main from './views/main';
+import Home from "./views/home";
 
 function App() {
   return (
-    <div className="app">
-      {/* <Main /> */}
-        <Home />
-    </div>
+    <Router>
+      <div className="app">
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/hem" component={Home} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
