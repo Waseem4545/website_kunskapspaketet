@@ -21,7 +21,7 @@ export default class Main extends Component {
         </div>
         <Categories />
         <div className="row instructions">
-          <div className="col-md-10 mx-auto content">
+          <div className="col-md-10 mx-auto pb-5 content">
             <h5>instruktioner om hur eleverna kan använda kategorierna</h5>
             <hr />
             <p>
