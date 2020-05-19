@@ -23,6 +23,7 @@
         cursor: pointer;
     }
 
+
     .categories ul li:nth-child(1) {
         background-color: #E92D2D;
     }
@@ -47,6 +48,24 @@
         background-color: #8C939A;
     }
 
+    @media only screen and (min-width:500px) {
+        @keyframes background-color {
+            0% {
+                transform: scale(1,1);
+            }
+            50% {
+                transform: scale(1.4,1.4);
+            }
+            100% {
+                transform: scale(1.2,1.2);
+            }
+          }
+    
+        .categories ul li:hover {
+            animation: background-color 2s ease-in-out;
+            animation-iteration-count: unset;
+        }
+    }
     /*----------------*/
     /* mobile Navbar  */
     /*----------------*/
