@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 /* thired part packages */
 
@@ -13,20 +13,45 @@ import Main from './views/main';
 import Home from "./views/home";
 import Categories_list from "./views/categoriesList";
 import Lecture from "./views/lecture";
+import fire from './config/Fire';
 
-function App() {
-  return (
-    <Router>
-      <div className="app">
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/hem" component={Home} />
-          <Route path="/kategori_list" component={Categories_list} />
-          <Route path="/forlasning" component={Lecture} />
-        </Switch>
-      </div>
-    </Router>
-  );
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    }
+  }
+
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
+      }
+    });
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="app">
+          <Switch>
+            <Route path="/" exact component={this.state.user ? Home : Main} />
+            <Route path="/hem" component={Home} />
+            <Route path="/kategori_list" component={Categories_list} />
+            <Route path="/forlasning" component={Lecture} />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
