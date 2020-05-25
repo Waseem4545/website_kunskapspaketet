@@ -10,8 +10,12 @@ export default class Main extends Component {
     super();
     this.logout = this.logout.bind(this);
     this.state = {
-      user: "Petter ",
+      user: '',
     };
+  }
+  componentDidMount() {
+    console.log(this.props.user);
+    
   }
 
   logout() {
@@ -44,3 +48,4 @@ export default class Main extends Component {
     );
   }
 }
+
