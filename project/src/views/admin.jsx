@@ -1,12 +1,35 @@
 import React, { Component } from "react";
 import RegisterForm from "../components/RegisterForm"
+import firebase from '../config/Fire'
+import { Link } from 'react-router-dom';
 
 export default class Admin extends Component {
   constructor(props) {
     super(props);
+    this.ref = firebase.firestore().collection('users');
+    this.unsubscribe = null;
     this.state = {
-      user: "",
+      users: [],
     };
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const users = []
+    querySnapshot.forEach((doc) => {
+      const {role, name, email} = doc.data()
+      users.push({
+        key: doc.id,
+        doc,
+        role,
+        name,
+        email,
+      });
+    });
+    this.setState({users})
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
   }
 
   render() {
@@ -31,7 +54,6 @@ export default class Admin extends Component {
                   <th scope="col">roll</th>
                   <th scope="col">Namn</th>
                   <th scope="col">e-post</th>
-                  <th scope="col">lösenord</th>
                   <th scope="col">
                     <button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#adduser">
                       <i class="fa fa-plus" aria-hidden="true"></i>
@@ -40,17 +62,26 @@ export default class Admin extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>lärare</td>
-                  <td>Petter</td>
-                  <td>petter@gmail.com</td>
-                  <td>petter321</td>
+              {
+                this.state.users.map(user => 
+                  <tr>
+                  <td>{user.role}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
                   <td>
-                    <button className="btn btn-danger btn-sm">
-                      <i class="fa fa-eraser" aria-hidden="true"></i>
-                    </button>
+                        <button className="btn btn-danger btn-sm">
+                          <i class="fa fa-eraser" aria-hidden="true"></i>
+                        </button>
+
+
                   </td>
                 </tr>
+                  
+                  
+                  )
+              }
+
+
               </tbody>
             </table>
           </div>
