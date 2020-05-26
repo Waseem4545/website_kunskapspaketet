@@ -1,12 +1,35 @@
 import React, { Component } from "react";
 import RegisterForm from "../components/RegisterForm"
+import firebase from '../config/Fire'
+import { Link } from 'react-router-dom';
 
 export default class Admin extends Component {
   constructor(props) {
     super(props);
+    this.ref = firebase.firestore().collection('users');
+    this.unsubscribe = null;
     this.state = {
-      user: "",
+      users: [],
     };
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const users = []
+    querySnapshot.forEach((doc) => {
+      const {role, name, email} = doc.data()
+      users.push({
+        key: doc.id,
+        doc,
+        role,
+        name,
+        email,
+      });
+    });
+    this.setState({users})
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
   }
 
   render() {
@@ -39,16 +62,33 @@ export default class Admin extends Component {
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
+              {
+                this.state.users.map(user => 
+                  <tr>
+                  <td>{user.role}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+=======
                 <tr>
                   <td>lärare</td>
                   <td>Petter</td>
                   <td>petter@gmail.com</td>
+>>>>>>> 53bdf997b17743fb116002ac03246c939a143ebd
                   <td>
-                    <button className="btn btn-danger btn-sm">
-                      <i class="fa fa-eraser" aria-hidden="true"></i>
-                    </button>
+                        <button className="btn btn-danger btn-sm">
+                          <i class="fa fa-eraser" aria-hidden="true"></i>
+                        </button>
+
+
                   </td>
                 </tr>
+                  
+                  
+                  )
+              }
+
+
               </tbody>
             </table>
           </div>
