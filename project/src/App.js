@@ -38,10 +38,11 @@ class App extends Component {
       <Router>
         <div className="app">
           <Switch>
-            <Route path="/" exact component={this.state.user ? Home : Main} />
-            <Route path="/hem" component={Home} />
-            <Route path="/kategori_list" component={Categories_list} />
-            <Route path="/forlasning" component={Lecture} />
+            <Route path="/" exact  component={this.state.user ? Home : Landing} />
+            <Route path="/hem" component={this.state.user ? Home : Landing} />
+            <Route path="/kategori_list" component={this.state.user ? Categories_list : Landing } />
+            <Route path="/forlasning" component={this.state.user ? Lecture : Landing} />
+            <Route path="/admin" component={this.state.user ? Admin : Landing} />
           </Switch>
         </div>
       </Router>

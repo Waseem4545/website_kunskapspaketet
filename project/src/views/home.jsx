@@ -12,6 +12,10 @@ class Home extends Component {
       user: null,
     };
   }
+  componentDidMount() {
+    console.log(this.props.user);
+    
+  }
 
   componentDidMount() {
     this.authChange = this.props.firebase.auth.onAuthStateChanged((user) => {
