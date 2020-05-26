@@ -11,7 +11,7 @@ export default class Admin extends Component {
 
   render() {
     return (
-      <div className="container public-container">
+      <div className="container">
         <header>
           
             <ul>
@@ -31,7 +31,6 @@ export default class Admin extends Component {
                   <th scope="col">roll</th>
                   <th scope="col">Namn</th>
                   <th scope="col">e-post</th>
-                  <th scope="col">lösenord</th>
                   <th scope="col">
                     <button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#adduser">
                       <i class="fa fa-plus" aria-hidden="true"></i>
@@ -44,7 +43,6 @@ export default class Admin extends Component {
                   <td>lärare</td>
                   <td>Petter</td>
                   <td>petter@gmail.com</td>
-                  <td>petter321</td>
                   <td>
                     <button className="btn btn-danger btn-sm">
                       <i class="fa fa-eraser" aria-hidden="true"></i>
@@ -86,12 +84,6 @@ export default class Admin extends Component {
               </tbody>
             </table>
           </div>
-
-
-    
-
-          
-
           
         </main>
         <RegisterForm />
