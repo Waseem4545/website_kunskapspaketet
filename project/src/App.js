@@ -8,11 +8,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './styles/css/main.css';
 import './styles/css/home.css';
 
-import Main from './views/main';
+import Landing from './views/landing';
 import Home from './views/home';
 import Categories_list from './views/categoriesList';
 import Lecture from './views/lecture';
 import { withFirebase } from './firebase';
+import Admin from './views/admin'
 
 class App extends Component {
   constructor(props) {
