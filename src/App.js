@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 /* thired part packages */
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { isLoaded, firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 
@@ -40,19 +40,17 @@ class App extends Component {
   render() {
     const profile = this.props.profile;
     return (
-      <Router>
+      <div className="app">
         {isLoaded(profile) && (
-          <div className="app">
-            <Switch>
-              <Route path="/" exact component={profile.email ? Home : Landing} />
-              <Route path="/hem" component={profile.email ? Home : Landing} />
-              <Route path="/kategori_list" component={profile.email ? Categories_list : Landing} />
-              <Route path="/forlasning" component={profile.email ? Lecture : Landing} />
-              <Route path="/admin" component={profile.email ? Admin : Landing} />
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/" exact component={profile.email ? Home : Landing} />
+            <Route path="/hem" component={profile.email ? Home : Landing} />
+            <Route path="/kategori_list" component={profile.email ? Categories_list : Landing} />
+            <Route path="/forlasning" component={profile.email ? Lecture : Landing} />
+            <Route path="/admin" component={profile.email ? Admin : Landing} />
+          </Switch>
         )}
-      </Router>
+      </div>
     );
   }
 }
