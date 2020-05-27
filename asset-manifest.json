@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/website_kunskapspaketet/static/css/main.e23d9a67.chunk.css",
+    "main.js": "/website_kunskapspaketet/static/js/main.339197a9.chunk.js",
+    "main.js.map": "/website_kunskapspaketet/static/js/main.339197a9.chunk.js.map",
+    "runtime-main.js": "/website_kunskapspaketet/static/js/runtime-main.f4cb1699.js",
+    "runtime-main.js.map": "/website_kunskapspaketet/static/js/runtime-main.f4cb1699.js.map",
+    "static/js/2.eefdffd5.chunk.js": "/website_kunskapspaketet/static/js/2.eefdffd5.chunk.js",
+    "static/js/2.eefdffd5.chunk.js.map": "/website_kunskapspaketet/static/js/2.eefdffd5.chunk.js.map",
+    "index.html": "/website_kunskapspaketet/index.html",
+    "precache-manifest.ba35bab053af4e246b167f090d2505d5.js": "/website_kunskapspaketet/precache-manifest.ba35bab053af4e246b167f090d2505d5.js",
+    "service-worker.js": "/website_kunskapspaketet/service-worker.js",
+    "static/css/main.e23d9a67.chunk.css.map": "/website_kunskapspaketet/static/css/main.e23d9a67.chunk.css.map",
+    "static/js/2.eefdffd5.chunk.js.LICENSE.txt": "/website_kunskapspaketet/static/js/2.eefdffd5.chunk.js.LICENSE.txt",
+    "static/media/fullscreen_mode.png": "/website_kunskapspaketet/static/media/fullscreen_mode.89a5d4f2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f4cb1699.js",
+    "static/js/2.eefdffd5.chunk.js",
+    "static/css/main.e23d9a67.chunk.css",
+    "static/js/main.339197a9.chunk.js"
+  ]
+}
