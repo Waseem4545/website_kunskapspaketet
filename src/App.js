@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 /* thired part packages */
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 
 import { isLoaded, firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 
@@ -42,13 +42,13 @@ class App extends Component {
     return (
       <div className="app">
         {isLoaded(profile) && (
-          <Switch>
+          <HashRouter>
             <Route path="/" exact component={profile.email ? Home : Landing} />
             <Route path="/hem" component={profile.email ? Home : Landing} />
             <Route path="/kategori_list" component={profile.email ? Categories_list : Landing} />
             <Route path="/forlasning" component={profile.email ? Lecture : Landing} />
             <Route path="/admin" component={profile.email ? Admin : Landing} />
-          </Switch>
+          </HashRouter>
         )}
       </div>
     );
