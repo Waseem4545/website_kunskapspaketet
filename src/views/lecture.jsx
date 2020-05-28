@@ -1,17 +1,14 @@
-import React, { Component } from "react";
-// import { videoTagString, VideoTag } from 'react-video-tag'
+import React, { Component } from 'react';
 
-import Mobile from "../components/navbar_mb";
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-export default class Main extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: "Petter ",
-    };
-  }
+import Navbar from '../components/navbar';
 
+class Lecture extends Component {
   render() {
+    const profile = this.props.profile;
+
     return (
       <div className="container-fluid public-container">
         <div className="lecture py-5">
@@ -23,46 +20,41 @@ export default class Main extends Component {
             <div className="col-md-10 mx-auto content p-3">
               <h4>Title </h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Quidem, nam quasi est distinctio consequuntur hic explicabo
-                ducimus natus cumque, repellendus cum fuga modi minima iure
-                quaerat suscipit, obcaecati dolores amet? Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit. Quidem, nam quasi est
-                distinctio consequuntur hic explicabo ducimus natus cumque,
-                repellendus cum fuga modi minima iure quaerat suscipit,
-                obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Quidem, nam quasi est distinctio consequuntur
-                hic explicabo ducimus natus cumque, repellendus cum fuga modi
-                minima iure quaerat suscipit, obcaecati dolores amet? Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam
-                quasi est distinctio consequuntur hic explicabo ducimus natus
-                cumque, repellendus cum fuga modi minima iure quaerat suscipit,
-                obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Quidem, nam quasi est distinctio consequuntur
-                hic explicabo ducimus natus cumque, repellendus cum fuga modi
-                minima iure quaerat suscipit, obcaecati dolores amet?end
-                minima iure quaerat suscipit, obcaecati dolores amet? Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam
-                quasi est distinctio consequuntur hic explicabo ducimus natus
-                cumque, repellendus cum fuga modi minima iure quaerat suscipit,
-                obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Quidem, nam quasi est distinctio consequuntur
-                hic explicabo ducimus natus cumque, repellendus cum fuga modi
-                minima iure quaerat suscipit, obcaecati dolores amet?end
-                minima iure quaerat suscipit, obcaecati dolores amet? Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam
-                quasi est distinctio consequuntur hic explicabo ducimus natus
-                cumque, repellendus cum fuga modi minima iure quaerat suscipit,
-                obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Quidem, nam quasi est distinctio consequuntur
-                hic explicabo ducimus natus cumque, repellendus cum fuga modi
-                minima iure quaerat suscipit, obcaecati dolores amet?end
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam quasi est distinctio consequuntur
+                hic explicabo ducimus natus cumque, repellendus cum fuga modi minima iure quaerat suscipit, obcaecati
+                dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam quasi est distinctio
+                consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga modi minima iure quaerat suscipit,
+                obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam quasi est
+                distinctio consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga modi minima iure
+                quaerat suscipit, obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Quidem, nam quasi est distinctio consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga
+                modi minima iure quaerat suscipit, obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Quidem, nam quasi est distinctio consequuntur hic explicabo ducimus natus cumque,
+                repellendus cum fuga modi minima iure quaerat suscipit, obcaecati dolores amet?end minima iure quaerat
+                suscipit, obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam
+                quasi est distinctio consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga modi minima
+                iure quaerat suscipit, obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Quidem, nam quasi est distinctio consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga
+                modi minima iure quaerat suscipit, obcaecati dolores amet?end minima iure quaerat suscipit, obcaecati
+                dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam quasi est distinctio
+                consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga modi minima iure quaerat suscipit,
+                obcaecati dolores amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, nam quasi est
+                distinctio consequuntur hic explicabo ducimus natus cumque, repellendus cum fuga modi minima iure
+                quaerat suscipit, obcaecati dolores amet?end
               </p>
             </div>
           </div>
         </div>
-        <Mobile />
+        <Navbar role={profile.role} />
       </div>
     );
   }
 }
+
+const enhance = compose(
+  connect((state) => ({
+    profile: state.firebase.profile,
+  }))
+);
+
+export default enhance(Lecture);
