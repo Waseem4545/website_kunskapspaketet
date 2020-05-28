@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RegisterForm from '../components/RegisterForm';
 import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import {useSelector, useDispatch} from 'react-redux'
 
 class Admin extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Admin extends Component {
 
     this.state = {
       users: [],
+      lectures: [],
     };
   }
 
@@ -22,9 +24,21 @@ class Admin extends Component {
         });
         this.setState({ users });
       });
+      this.props.firestore
+      .collection('lectures')
+      .get()
+      .then((snapshot) => {
+        const lectures = snapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        this.setState({ lectures });
+      });
   }
 
+
   render() {
+    let { users, lectures } = this.state
+    
     return (
       <div className="container">
         <header>
@@ -52,7 +66,7 @@ class Admin extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.users.map((user) => (
+                {users.map((user) => (
                   <tr key={user.id}>
                     <td>{user.role}</td>
                     <td>{user.name}</td>
@@ -68,38 +82,45 @@ class Admin extends Component {
               </tbody>
             </table>
           </div>
-
-          <div className="lecture mt-5">
-            <div className="w-100">
-              <h5 className="text-center">Föreläsning</h5>
+          {
+            lectures.map((lecture) => (
+              <div className="lecture mt-5" id={lecture.name}  key={lecture.id}>
+              <div className="w-100" style={{backgroundColor: lecture.color}}>
+                <h5 className="text-center">{lecture.name}</h5>
+              </div>
+              <table className="table table-sm">
+                <thead className="bg-Secondary">
+                  <tr>
+                    <th scope="col">kategori</th>
+                    <th scope="col">video</th>
+                    <th scope="col">info</th>
+                    <th scope="col">
+                      <button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#lecture">
+                        <i className="fa fa-plus" aria-hidden="true"></i>
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    
+                  }
+                  <tr>
+                    <td>hälsa</td>
+                    <td>https://getbootstra.....</td>
+                    <td>Lorem ipsum dolor, sit amet....</td>
+                    <td>
+                      <button className="btn btn-danger mr-1 btn-sm">
+                        <i className="fa fa-eraser" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <table className="table table-sm">
-              <thead className="bg-Secondary">
-                <tr>
-                  <th scope="col">kategori</th>
-                  <th scope="col">video</th>
-                  <th scope="col">info</th>
-                  <th scope="col">
-                    <button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#lecture">
-                      <i className="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>hälsa</td>
-                  <td>https://getbootstra.....</td>
-                  <td>Lorem ipsum dolor, sit amet....</td>
-                  <td>
-                    <button className="btn btn-danger mr-1 btn-sm">
-                      <i className="fa fa-eraser" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            ))
+          }
+       
         </main>
         <RegisterForm />
       </div>
