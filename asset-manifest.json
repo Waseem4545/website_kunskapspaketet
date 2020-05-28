@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/website_kunskapspaketet/static/css/main.e23d9a67.chunk.css",
-    "main.js": "/website_kunskapspaketet/static/js/main.ae4e4015.chunk.js",
-    "main.js.map": "/website_kunskapspaketet/static/js/main.ae4e4015.chunk.js.map",
+    "main.css": "/website_kunskapspaketet/static/css/main.8af173a3.chunk.css",
+    "main.js": "/website_kunskapspaketet/static/js/main.58286acd.chunk.js",
+    "main.js.map": "/website_kunskapspaketet/static/js/main.58286acd.chunk.js.map",
     "runtime-main.js": "/website_kunskapspaketet/static/js/runtime-main.f4cb1699.js",
     "runtime-main.js.map": "/website_kunskapspaketet/static/js/runtime-main.f4cb1699.js.map",
-    "static/js/2.e6dad25b.chunk.js": "/website_kunskapspaketet/static/js/2.e6dad25b.chunk.js",
-    "static/js/2.e6dad25b.chunk.js.map": "/website_kunskapspaketet/static/js/2.e6dad25b.chunk.js.map",
+    "static/js/2.af2e44ba.chunk.js": "/website_kunskapspaketet/static/js/2.af2e44ba.chunk.js",
+    "static/js/2.af2e44ba.chunk.js.map": "/website_kunskapspaketet/static/js/2.af2e44ba.chunk.js.map",
     "index.html": "/website_kunskapspaketet/index.html",
-    "precache-manifest.ef777ba49261a89c4ee81d1e82787c22.js": "/website_kunskapspaketet/precache-manifest.ef777ba49261a89c4ee81d1e82787c22.js",
+    "precache-manifest.d8cdee259b3bcfd3513690e92beeec6f.js": "/website_kunskapspaketet/precache-manifest.d8cdee259b3bcfd3513690e92beeec6f.js",
     "service-worker.js": "/website_kunskapspaketet/service-worker.js",
-    "static/css/main.e23d9a67.chunk.css.map": "/website_kunskapspaketet/static/css/main.e23d9a67.chunk.css.map",
-    "static/js/2.e6dad25b.chunk.js.LICENSE.txt": "/website_kunskapspaketet/static/js/2.e6dad25b.chunk.js.LICENSE.txt",
+    "static/css/main.8af173a3.chunk.css.map": "/website_kunskapspaketet/static/css/main.8af173a3.chunk.css.map",
+    "static/js/2.af2e44ba.chunk.js.LICENSE.txt": "/website_kunskapspaketet/static/js/2.af2e44ba.chunk.js.LICENSE.txt",
     "static/media/fullscreen_mode.png": "/website_kunskapspaketet/static/media/fullscreen_mode.89a5d4f2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f4cb1699.js",
-    "static/js/2.e6dad25b.chunk.js",
-    "static/css/main.e23d9a67.chunk.css",
-    "static/js/main.ae4e4015.chunk.js"
+    "static/js/2.af2e44ba.chunk.js",
+    "static/css/main.8af173a3.chunk.css",
+    "static/js/main.58286acd.chunk.js"
   ]
 }
