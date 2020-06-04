@@ -6,10 +6,9 @@ import '../styles/css/admin.css';
 import UserTable from '../components/userTable';
 import LectureTable from '../components/lectureTable';
 
+import { useSelector, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import RegisterForm from '../components/RegisterForm';
-import Navbar from '../components/navbar';
-import Topbar from '../components/topbar';
 
 class Admin extends Component {
   constructor(props) {
@@ -22,41 +21,95 @@ class Admin extends Component {
       email: '',
       phoneNumber: '',
       role: '',
-      password: ''
+      password: '',
+      msg: '',
     };
     this.createUser = this.createUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.errorHandle = this.errorHandle.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this)
   }
+
+
 
   createUser(e) {
     e.preventDefault();
-    const profile = {
-      email: this.state.email,
-      phoneNumber: this.state.phoneNumber,
-      name: this.state.name,
-      role: 'student'
-    };
-    this.props.firebase.createUser(this.state, profile).catch(err => {
-      console.log('doCreateUserWithEmailAndPassword - err: ', err);
-    });
+    const {email, password} = this.state
+    if (email.length > 0 && password.length > 0) {
+      const profile = {
+        email: this.state.email,
+        phoneNumber: this.state.phoneNumber,
+        name: this.state.name,
+        role: this.state.role
+      };
+      this.props.firebase.createUser(this.state, profile).catch(err => {
+        console.log('doCreateUserWithEmailAndPassword - err: ', err);
+        this.errorHandle(err.code)
+      });
+    }
+    else {
+      this.setState({ msg: 'E-post och lösenord måste deklareras' });
+    }
+
   }
 
+
+
+
+  errorHandle(err) {
+    if (err === 'auth/wrong-password') {
+      this.setState({ msg: 'E-postadressen eller lösenord felaktig' });
+    }
+    if (err === 'auth/invalid-email') {
+      this.setState({ msg: 'E-postadressen är inte glitlig' });
+    }
+    if (err === 'auth/user-not-found') {
+      this.setState({ msg: 'E-postadressen finns inte' });
+    }
+    if (err === 'auth/email-already-in-use') {
+      this.setState({ msg: 'E-postadressen används redan av ett annat konto.' });
+    }
+    if (err === 'auth/weak-password') {
+      this.setState({ msg: 'Lösenordet måste vara minst 6 tecken' });
+    }
+  }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handleSelectChange = (event) => {
+    this.setState({
+      role: event.target.value
+    })
+  }
+
   render() {
-    const { profile, lectures, users } = this.props;
+    const { profile, lectures, users} = this.props;
 
     return (
       <div className="container admin">
-        <Topbar name="Administration" />
         <header className="adminHeader">
+          <nav>
+            <h6>Adminstration</h6>
+            <ul>
+              <li>användare: {profile.name}</li>
+              <li>
+                <i className="fa fa-cog fa-2x" aria-hidden="true"></i>
+              </li>
+            </ul>
+  
+          </nav>
+          <div className="w-75 mx-auto">
+            <p className="bg-warning text-center" style={{ fontSize: '13px' }}>
+              {this.state.msg}
+            </p>
+          </div>
+
           <div className="edit">
             <ul>
               <li>
                 <button className="btn btn-primary " data-toggle="modal" data-target="#adduser">
-                  <i className="fa fa-plus fa-lg mr-2" aria-hidden="true"></i> Elev
+                  <i className="fa fa-plus fa-lg mr-2" aria-hidden="true"></i> Konto
                 </button>
               </li>
               <li>
@@ -123,9 +176,9 @@ class Admin extends Component {
                     </div>
                     <div className="form-group">
                       <label> Roll </label>
-                      <select className="form-control form-control-sm">
-                        <option name="role">elev</option>
-                        <option name="role">Lärare</option>
+                      <select className="form-control form-control-sm" onClick={this.handleSelectChange}>
+                        <option value="student" >elev</option>
+                        <option value="teacher">Lärare</option>
                       </select>
                     </div>
                     <div className="modal-footer">
@@ -143,11 +196,9 @@ class Admin extends Component {
           </div>
         </main>
         <RegisterForm />
-        <div className="navbar-margin">
-          {users && <UserTable users={users} />}
-          {lectures && <LectureTable lectures={lectures} />}
-        </div>
-        <Navbar role={profile.role} />
+        {users && <UserTable users={users} />}
+        {lectures && <LectureTable lectures={lectures} />}
+   
       </div>
     );
   }
@@ -162,14 +213,16 @@ class Admin extends Component {
 //   }))
 // );
 
+
 const enhance = compose(
   firebaseConnect(),
   firestoreConnect(() => ['lectures', 'users']),
-  connect(state => ({
+  connect((state) => ({
     profile: state.firebase.profile,
     lectures: state.firestore.ordered.lectures,
     users: state.firestore.ordered.users
   }))
 );
+
 
 export default enhance(Admin);
