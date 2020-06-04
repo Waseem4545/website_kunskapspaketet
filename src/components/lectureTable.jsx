@@ -33,8 +33,7 @@ const LectureTable = props => {
     {
       name: 'Kategori',
       selector: 'category',
-      sortable: true,
-      width: '120px'
+      sortable: true
     },
     {
       name: 'Video url',
