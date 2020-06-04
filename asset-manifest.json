@@ -1,23 +1,26 @@
 {
   "files": {
-    "main.css": "/website_kunskapspaketet/static/css/main.8af173a3.chunk.css",
-    "main.js": "/website_kunskapspaketet/static/js/main.58286acd.chunk.js",
-    "main.js.map": "/website_kunskapspaketet/static/js/main.58286acd.chunk.js.map",
+    "main.css": "/website_kunskapspaketet/static/css/main.17139a3d.chunk.css",
+    "main.js": "/website_kunskapspaketet/static/js/main.1b980015.chunk.js",
+    "main.js.map": "/website_kunskapspaketet/static/js/main.1b980015.chunk.js.map",
     "runtime-main.js": "/website_kunskapspaketet/static/js/runtime-main.f4cb1699.js",
     "runtime-main.js.map": "/website_kunskapspaketet/static/js/runtime-main.f4cb1699.js.map",
-    "static/js/2.af2e44ba.chunk.js": "/website_kunskapspaketet/static/js/2.af2e44ba.chunk.js",
-    "static/js/2.af2e44ba.chunk.js.map": "/website_kunskapspaketet/static/js/2.af2e44ba.chunk.js.map",
+    "static/css/2.1f51cae3.chunk.css": "/website_kunskapspaketet/static/css/2.1f51cae3.chunk.css",
+    "static/js/2.5f5896f3.chunk.js": "/website_kunskapspaketet/static/js/2.5f5896f3.chunk.js",
+    "static/js/2.5f5896f3.chunk.js.map": "/website_kunskapspaketet/static/js/2.5f5896f3.chunk.js.map",
     "index.html": "/website_kunskapspaketet/index.html",
-    "precache-manifest.d8cdee259b3bcfd3513690e92beeec6f.js": "/website_kunskapspaketet/precache-manifest.d8cdee259b3bcfd3513690e92beeec6f.js",
+    "precache-manifest.5b7e615753461a46bb8777b3f9e0d65a.js": "/website_kunskapspaketet/precache-manifest.5b7e615753461a46bb8777b3f9e0d65a.js",
     "service-worker.js": "/website_kunskapspaketet/service-worker.js",
-    "static/css/main.8af173a3.chunk.css.map": "/website_kunskapspaketet/static/css/main.8af173a3.chunk.css.map",
-    "static/js/2.af2e44ba.chunk.js.LICENSE.txt": "/website_kunskapspaketet/static/js/2.af2e44ba.chunk.js.LICENSE.txt",
+    "static/css/2.1f51cae3.chunk.css.map": "/website_kunskapspaketet/static/css/2.1f51cae3.chunk.css.map",
+    "static/css/main.17139a3d.chunk.css.map": "/website_kunskapspaketet/static/css/main.17139a3d.chunk.css.map",
+    "static/js/2.5f5896f3.chunk.js.LICENSE.txt": "/website_kunskapspaketet/static/js/2.5f5896f3.chunk.js.LICENSE.txt",
     "static/media/fullscreen_mode.png": "/website_kunskapspaketet/static/media/fullscreen_mode.89a5d4f2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f4cb1699.js",
-    "static/js/2.af2e44ba.chunk.js",
-    "static/css/main.8af173a3.chunk.css",
-    "static/js/main.58286acd.chunk.js"
+    "static/css/2.1f51cae3.chunk.css",
+    "static/js/2.5f5896f3.chunk.js",
+    "static/css/main.17139a3d.chunk.css",
+    "static/js/main.1b980015.chunk.js"
   ]
 }
