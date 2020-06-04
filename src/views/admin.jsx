@@ -6,9 +6,11 @@ import '../styles/css/admin.css';
 import UserTable from '../components/userTable';
 import LectureTable from '../components/lectureTable';
 
-import { useSelector, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import RegisterForm from '../components/RegisterForm';
+
+import Navbar from '../components/navbar';
+import Topbar from '../components/topbar';
 
 class Admin extends Component {
   constructor(props) {
@@ -22,19 +24,17 @@ class Admin extends Component {
       phoneNumber: '',
       role: '',
       password: '',
-      msg: '',
+      msg: ''
     };
     this.createUser = this.createUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.errorHandle = this.errorHandle.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this)
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
-
-
 
   createUser(e) {
     e.preventDefault();
-    const {email, password} = this.state
+    const { email, password } = this.state;
     if (email.length > 0 && password.length > 0) {
       const profile = {
         email: this.state.email,
@@ -44,17 +44,12 @@ class Admin extends Component {
       };
       this.props.firebase.createUser(this.state, profile).catch(err => {
         console.log('doCreateUserWithEmailAndPassword - err: ', err);
-        this.errorHandle(err.code)
+        this.errorHandle(err.code);
       });
-    }
-    else {
+    } else {
       this.setState({ msg: 'E-post och lösenord måste deklareras' });
     }
-
   }
-
-
-
 
   errorHandle(err) {
     if (err === 'auth/wrong-password') {
@@ -77,28 +72,19 @@ class Admin extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSelectChange = (event) => {
+  handleSelectChange = event => {
     this.setState({
       role: event.target.value
-    })
-  }
+    });
+  };
 
   render() {
-    const { profile, lectures, users} = this.props;
+    const { profile, lectures, users } = this.props;
 
     return (
       <div className="container admin">
+        <Topbar name="Administration" />
         <header className="adminHeader">
-          <nav>
-            <h6>Adminstration</h6>
-            <ul>
-              <li>användare: {profile.name}</li>
-              <li>
-                <i className="fa fa-cog fa-2x" aria-hidden="true"></i>
-              </li>
-            </ul>
-  
-          </nav>
           <div className="w-75 mx-auto">
             <p className="bg-warning text-center" style={{ fontSize: '13px' }}>
               {this.state.msg}
@@ -177,7 +163,7 @@ class Admin extends Component {
                     <div className="form-group">
                       <label> Roll </label>
                       <select className="form-control form-control-sm" onClick={this.handleSelectChange}>
-                        <option value="student" >elev</option>
+                        <option value="student">elev</option>
                         <option value="teacher">Lärare</option>
                       </select>
                     </div>
@@ -196,33 +182,24 @@ class Admin extends Component {
           </div>
         </main>
         <RegisterForm />
-        {users && <UserTable users={users} />}
-        {lectures && <LectureTable lectures={lectures} />}
-   
+        <div className="navbar-margin">
+          {users && <UserTable users={users} />}
+          {lectures && <LectureTable lectures={lectures} />}
+        </div>
+        <Navbar role={profile.role} />
       </div>
     );
   }
 }
 
-// const enhance = compose(
-//   firebaseConnect(),
-
-//   firestoreConnect(),
-//   connect(state => ({
-//     profile: state.firebase.profile
-//   }))
-// );
-
-
 const enhance = compose(
   firebaseConnect(),
   firestoreConnect(() => ['lectures', 'users']),
-  connect((state) => ({
+  connect(state => ({
     profile: state.firebase.profile,
     lectures: state.firestore.ordered.lectures,
     users: state.firestore.ordered.users
   }))
 );
-
 
 export default enhance(Admin);
