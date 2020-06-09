@@ -93,5 +93,9 @@
 }
 
 button + button {
-  margin-left: 4px;
+  margin-left: 2px;
+}
+
+.text-14 {
+  font-size: 0.8rem;
 }
