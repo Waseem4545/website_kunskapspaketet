@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import Topbar from '../components/topbar';
 import Navbar from '../components/navbar';
+import { withRouter } from 'react-router-dom';
 import Notify from '../components/notify';
 import * as servicesHttp from '../services/http';
 
@@ -26,6 +27,7 @@ class Settings extends Component {
 
   logout() {
     this.props.firebase.logout();
+    this.props.history.push('/');
   }
 
   handleChange(e) {
@@ -144,7 +146,8 @@ const enhance = compose(
   firebaseConnect(),
   connect(state => ({
     profile: state.firebase.profile
-  }))
+  })),
+  withRouter
 );
 
 export default enhance(Settings);
