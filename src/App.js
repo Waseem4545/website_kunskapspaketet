@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 
 /* thired part packages */
 
-import { Route, HashRouter, Switch } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 
 import { isLoaded, firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
@@ -20,6 +20,7 @@ import Admin from './views/admin';
 import Settings from './views/settings';
 import Lecture from './views/lecture';
 import NoMatch from './views/no-match';
+
 
 class App extends Component {
   constructor(props) {
@@ -57,13 +58,13 @@ class App extends Component {
         />
         {isLoaded(profile) && (
           <HashRouter>
-            <Switch>
-              <Route path="/" exact component={profile.email ? Home : Landing} />
-              <Route path="/settings" component={profile.email ? Settings : Landing} />
-              <Route path="/lecture/:lectureName" component={profile.email ? Lecture : Landing} />
-              <Route path="/admin" component={profile.email ? Admin : Landing} />
-              <Route component={NoMatch}></Route>
-            </Switch>
+            <Suspense fallback="loading">
+            <Route path="/" exact component={profile.email ? Home : Landing} />
+            </Suspense>
+            <Route path="/settings" component={profile.email ? Settings : Landing} />
+            <Route path="/lecture/:lectureName" component={profile.email ? Lecture : Landing} />
+            <Route path="/admin" component={profile.email ? Admin : Landing} />
+            <Route component={NoMatch}></Route>
           </HashRouter>
         )}
       </div>

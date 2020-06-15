@@ -13,6 +13,10 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import thunk from 'redux-thunk';
 
+import './i18next';
+
+
+
 const fbConfig = {
   apiKey: 'AIzaSyCjN4obQGSoePw-wME_yA8JVx6kIzuRCwE',
   authDomain: 'kunskapspaketet.firebaseapp.com',

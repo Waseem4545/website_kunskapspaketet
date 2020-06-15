@@ -6,11 +6,25 @@ import { compose } from 'redux';
 
 import Categories from '../components/categories';
 import Navbar from '../components/navbar';
+import { withTranslation } from 'react-i18next';
+import i18n from '../i18next';
 
 class Home extends Component {
   render() {
-    const { profile } = this.props;
-    const { lectures } = this.props;
+    const possibleLanguages = [
+      { short: 'ar', long: 'Arabiska' },
+      { short: 'en', long: 'Engelska' },
+      { short: 'sv', long: 'Svenska' },
+      { short: 'so', long: 'Somaliska' },
+      { short: 'ur', long: 'Urdu' }
+    ];
+    let selectedLanguage = this.props.i18n.language;
+    const changeLanguage = lng => {
+      i18n.changeLanguage(lng);
+      selectedLanguage = lng;
+    };
+
+    const { lectures, profile, t } = this.props;
 
     return (
       <div>
@@ -19,15 +33,26 @@ class Home extends Component {
             <h6 className="text-white text-center py-3">Välkommen {profile.name ? profile.name : profile.email}</h6>
           </div>
           {lectures && lectures.length > 0 && <Categories lectures={lectures} />}
-          <div className="row m-0 mt-4 px-2">
-            <div className="col-md-10 mx-auto px-0 pb-5">
-              <h5>instruktioner om hur eleverna kan använda kategorierna</h5>
+          <div className="row m-0 my-4 px-2 py-3">
+
+            <div className="translate_bt col-md-10 mx-auto my-5 d-flex flex-column">
+              <label style={{fontSize: '18px', fontWeight: "600"}}>Översätta : </label>
+              <select
+                className="custom-select w-25"
+                value={selectedLanguage}
+                onChange={e => changeLanguage(e.target.value)}>
+                {possibleLanguages.map(lang => (
+                  <option key={lang.short} value={lang.short}>
+                    {lang.long}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-md-10 mx-auto pb-5 ">
+              <h5>{t('title')}</h5>
               <hr className="my-2" />
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id recusandae commodi dolorem aperiam
-                quibusdam, itaque temporibus nobis, praesentium, corrupti officiis debitis unde voluptate quaerat
-                veritatis. Sed officiis nihil ipsum vitae!
-              </p>
+              <p>{t('description')}</p>
             </div>
           </div>
         </div>
@@ -50,4 +75,4 @@ const enhance = compose(
   }))
 );
 
-export default enhance(Home);
+export default enhance(withTranslation()(Home));
