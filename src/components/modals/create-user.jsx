@@ -52,7 +52,7 @@ class CreateUser extends Component {
     this.setState({ phoneNumber: '' });
     this.setState({ password: '' });
     this.setState({ role: 'student' });
-    this.setState({ teacher: '' });
+    this.setState({ teacher: 'default' });
   }
 
   save(e) {
