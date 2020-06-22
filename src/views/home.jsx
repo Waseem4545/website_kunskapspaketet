@@ -11,20 +11,19 @@ import i18n from '../i18next';
 
 class Home extends Component {
   render() {
-    const possibleLanguages = [
-      { short: 'ar', long: 'Arabiska' },
-      { short: 'en', long: 'Engelska' },
-      { short: 'sv', long: 'Svenska' },
-      { short: 'so', long: 'Somaliska' },
-      { short: 'ur', long: 'Urdu' }
-    ];
     let selectedLanguage = this.props.i18n.language;
     const changeLanguage = lng => {
       i18n.changeLanguage(lng);
       selectedLanguage = lng;
     };
 
-    const { lectures, profile, t } = this.props;
+    const { lectures, profile, languages, t } = this.props;
+
+    if (languages?.length > 0) {
+      languages.forEach(language => {
+        this.props.i18n.addResourceBundle(language.name, 'translation', language.keys);
+      });
+    }
 
     return (
       <div>
@@ -37,19 +36,19 @@ class Home extends Component {
             <div className="translate_bt col-12 col-lg-9 mx-auto my-3 d-flex flex-column">
               <select
                 className="form-control"
-                style={{ maxWidth: '320px' }}
+                style={{ maxWidth: '340px' }}
                 value={selectedLanguage}
                 onChange={e => changeLanguage(e.target.value)}>
-                {possibleLanguages.map(lang => (
-                  <option key={lang.short} value={lang.short}>
-                    {lang.long}
+                {languages?.map(lang => (
+                  <option key={lang.id} value={lang.name}>
+                    {lang.name}
                   </option>
                 ))}
               </select>
             </div>
 
             <div className="col-12 col-lg-9 mx-auto pb-5 ">
-              <h5>{t('title')}</h5>
+              <h5>{t('welcomeTitle')}</h5>
               <hr className="my-2" />
               <p>{t('description')}</p>
             </div>
@@ -66,11 +65,15 @@ const enhance = compose(
     {
       collection: 'lectures',
       where: ['isVisible', '==', true]
+    },
+    {
+      collection: 'i18n'
     }
   ]),
   connect(state => ({
     profile: state.firebase.profile,
-    lectures: state.firestore.ordered.lectures
+    lectures: state.firestore.ordered.lectures,
+    languages: state.firestore.ordered.i18n
   }))
 );
 

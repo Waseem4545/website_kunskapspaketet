@@ -12,6 +12,7 @@ import Topbar from '../components/topbar';
 import Notify from '../components/notify';
 import UserTable from '../components/userTable';
 import LectureTable from '../components/lectureTable';
+import LanguageTable from '../components/languageTable';
 
 import * as servicesHttp from '../services/http';
 
@@ -23,7 +24,7 @@ class Admin extends Component {
     }
   }
   render() {
-    const { profile, lectures, users } = this.props;
+    const { profile, lectures, users, languages, firestore } = this.props;
 
     const deleteUser = id => {
       servicesHttp
@@ -31,6 +32,19 @@ class Admin extends Component {
         .then(res => {
           console.log('res: ', res);
           Notify.success(res.data);
+        })
+        .catch(err => servicesHttp.handleError(err));
+    };
+
+    const deleteLanguage = id => {
+      const langName = languages.find(x => x.id === id).name;
+      firestore
+        .collection('i18n')
+        .doc(id)
+        .delete()
+        .then(res => {
+          console.log('res: ', res);
+          Notify.success(`${langName} har raderats`);
         })
         .catch(err => servicesHttp.handleError(err));
     };
@@ -62,6 +76,9 @@ class Admin extends Component {
           {profile.role === 'super_admin' && lectures && (
             <LectureTable lectures={lectures} toggleLecture={toggleLecture} firestore={this.props.firestore} />
           )}
+          {profile.role === 'super_admin' && languages && (
+            <LanguageTable languages={languages} deleteLanguage={deleteLanguage} />
+          )}
         </div>
         <Navbar role={profile.role} />
       </div>
@@ -73,7 +90,8 @@ const enhance = compose(
   connect(state => ({
     profile: state.firebase.profile,
     lectures: state.firestore.ordered.lectures,
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+    languages: state.firestore.ordered.i18n
   })),
   firebaseConnect(),
   firestoreConnect(props => {
@@ -86,6 +104,7 @@ const enhance = compose(
     } else {
       getArr.push({ collection: 'users', where: ['teacher', '==', uid] });
     }
+    getArr.push({ collection: 'i18n' });
     return getArr;
   }),
   withRouter

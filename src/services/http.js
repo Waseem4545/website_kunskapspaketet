@@ -17,5 +17,5 @@ export function updateUser(id, updatedValues) {
 export function handleError(err) {
   console.log('err: ', err);
   console.log(JSON.stringify(err));
-  Notify.error(`Något gick fel: ${err.message}`);
+  Notify.error(`Något gick fel: ${err?.message}`);
 }
